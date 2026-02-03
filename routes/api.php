@@ -10,4 +10,5 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/articles', [ArticlesController::class, 'index']);
+Route::get('/articles/{id}', [ArticlesController::class, 'show']);
 Route::post('/articles', [ArticlesController::class, 'create']);

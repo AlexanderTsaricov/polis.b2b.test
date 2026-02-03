@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticlesCreateRequest;
 use App\Http\Requests\ArticlesGetRequest;
+use App\Http\Requests\ArticlesShowRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -55,9 +56,18 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ArticlesShowRequest $request)
     {
-        //
+        $request->validated();
+        $id = $request->route('id');
+
+        $article = Article::find($id);
+
+        if (!$article) {
+            return response()->json(['success' => false, 'message' => 'Article not found'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $article]);
     }
 
     /**
