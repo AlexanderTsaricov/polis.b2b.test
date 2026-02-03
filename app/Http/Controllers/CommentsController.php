@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentCreateRequest;
 use App\Http\Requests\CommentIndexRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CommentsController extends Controller
 {
@@ -28,9 +30,22 @@ class CommentsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(CommentCreateRequest $request)
     {
-        
+        $data = $request->validated();
+
+        try {
+            $comment = Comment::create($data);
+
+            if (! $comment) {
+                return response()->json(['success' => false, 'message' => 'Create failed'], 400);
+            }
+
+            return response()->json(['success' => true, 'data' => $comment], 201);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Server error'], 500);
+        }
     }
 
     /**

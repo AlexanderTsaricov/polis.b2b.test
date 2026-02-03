@@ -17,3 +17,4 @@ Route::post('/articles', [ArticlesController::class, 'create']);
 
 // Роуты Comment
 Route::get('/articles/{id}/comments', [CommentsController::class, 'index']);
+Route::post('/articles/{id}/comments', [CommentsController::class, 'create']);
