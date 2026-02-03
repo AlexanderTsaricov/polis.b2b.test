@@ -83,11 +83,17 @@ docker-compose up -d
 ```bash
 docker exec -it backend bash
 ```
+### Внутри контейнера
 
 4. Установите зависимости:
 ```bash
 composer install
 npm install
+```
+
+5. Проведите миграцию таблиц:
+```bash
+php artisan migrate
 ```
 
 # Использование сидеров:
