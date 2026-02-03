@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticlesGetRequest extends FormRequest
+class ArticlesCreateRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,8 +14,8 @@ class ArticlesGetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'limit' => 'sometimes|integer|min:1|max:100',
-            'page'  => 'sometimes|integer|min:1',
+            'title'   => 'required|string|max:255',
+            'content' => 'required|string',
         ];
     }
 }
