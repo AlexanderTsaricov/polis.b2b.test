@@ -15,7 +15,7 @@ class ArticlesController extends Controller
      */
     public function index(ArticlesGetRequest $request)
     {
-        $request->validate();
+        $request->validated();
         $limit = $request->query('limit', 10);
         $page  = $request->query('page', 1);
 
@@ -29,7 +29,7 @@ class ArticlesController extends Controller
      */
     public function create(ArticlesCreateRequest $request)
     {
-        $data = $request->validate();
+        $data = $request->validated();
         try {
             $article = Article::create($data);
 
